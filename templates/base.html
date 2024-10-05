@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html class="no.js' %}" lang="zxx">
+{% include 'head.html' %}
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+{% include 'header.html' %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% include 'footer.html' %}
+
+<div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="serch_form">
+                <input type="text" placeholder="Search">
+                <button type="submit">search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include 'scripts.html' %}
+</body>
+</html>

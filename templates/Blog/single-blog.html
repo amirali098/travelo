@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block content %}
+
+    <div class="bradcam_area bradcam_bg_4">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>{{ post.title }}</h3>
+                        <p>Pixel perfect design with awesome contents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="{{ post.image.url }}" alt>
+                        </div>
+                        <div class="blog_details">
+                            <h2>{{ post.title }}
+                            </h2>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><a href="#"><i class="fa fa-user"></i> {{ post.author }}</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                <li><a href="#"><i class="bi bi-eye"></i> {{ post.counted_views }} Views</a></li>
+                                <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}<a href="{% url 'blog:category-filter' id=cat.id %}">
+                                    {{ cat.name }}{% if not forloop.last %},{% endif %}{% endfor %}</a></li>
+                                <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|date:"d M Y" }}</a>
+                                </li>
+                            </ul>
+                            <p class="excert">
+                                {{ post.title }}
+                            </p>
+
+                            <div class="quote-wrapper">
+                                <div class="quotes">
+                                    {{ post.content }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% include 'Blog/Module/author.html' %}
+                    {% include "Blog/Module/comment area and form.html" %}
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        {% include "Blog/Module/search.html" %}
+                        {% postcategories %}
+                        {% latest_posts %}
+                                                {% include "Blog/Module/tag.html" %}
+
+                        {% include "Blog/Module/instagram_feeds.html" %}
+                        {% include "Blog/Module/newsletter_widget.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
