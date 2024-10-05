@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+    <div class="bradcam_area bradcam_bg_4">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>blog</h3>
+                        <p>Pixel perfect design with awesome contents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+
+                        {% for post in posts %}
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" src="{{ post.image.url }}" alt>
+                                    <a href="#" class="blog_item_date">
+                                        <h3>{{ post.published_date|date:"d" }}</h3>
+                                        <p>{{ post.published_date|date:"M" }}</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="{% url "blog:blog-single" id=post.id %}">
+                                        <h2>{{ post.title }}</h2>
+                                    </a>
+                                    <p>{{ post.content|truncatewords:25 }}</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="fa fa-user"></i>{{ post.author }}</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i> {{ post|approved_comment_count }} Comments</a></li>
+                                        <li><a href="#"><i class="bi bi-eye"></i> {{ post.counted_views }} Views</a>
+                                        </li>
+                                        <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}<a href="{% url 'blog:category-filter' id=cat.id %}">
+                                            {{ cat.name }}{% if not forloop.last %},{% endif %}{% endfor %}</a></li>
+                                        <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|date:"d M Y" }}
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                        {% endfor %}
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a href="#" class="page-link">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        {% include "Blog/Module/search.html" %}
+                        {% postcategories %}
+                        {% latest_posts %}
+                        {% include "Blog/Module/instagram_feeds.html" %}
+                        {% include "Blog/Module/newsletter_widget.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}
