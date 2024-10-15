@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load blog_tags %}
-
+{% load humanize %}
 {% block content %}
 
     <div class="bradcam_area bradcam_bg_4">
@@ -21,7 +21,7 @@
     <section class="blog_area single-post-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 posts-list">
+                <div class="col-lg-7 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
                             <img class="img-fluid" src="{{ post.image.url }}" alt>
@@ -33,9 +33,10 @@
                                 <li><a href="#"><i class="fa fa-user"></i> {{ post.author }}</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                                 <li><a href="#"><i class="bi bi-eye"></i> {{ post.counted_views }} Views</a></li>
-                                <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}<a href="{% url 'blog:category-filter' id=cat.id %}">
+                                <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}
+                                    <a href="{% url 'blog:category-filter' id=cat.id %}">
                                     {{ cat.name }}{% if not forloop.last %},{% endif %}{% endfor %}</a></li>
-                                <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|date:"d M Y" }}</a>
+                                <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|naturaltime }}</a>
                                 </li>
                             </ul>
                             <p class="excert">
@@ -44,7 +45,7 @@
 
                             <div class="quote-wrapper">
                                 <div class="quotes">
-                                    {{ post.content }}
+                                    {{ post.content|safe }}
                                 </div>
                             </div>
 
@@ -52,6 +53,7 @@
                     </div>
 
                     {% include 'Blog/Module/author.html' %}
+
                     {% include "Blog/Module/comment area and form.html" %}
                 </div>
                 <div class="col-lg-4">
@@ -59,8 +61,7 @@
                         {% include "Blog/Module/search.html" %}
                         {% postcategories %}
                         {% latest_posts %}
-                                                {% include "Blog/Module/tag.html" %}
-
+                        {% include "Blog/Module/tag.html" %}
                         {% include "Blog/Module/instagram_feeds.html" %}
                         {% include "Blog/Module/newsletter_widget.html" %}
                     </div>

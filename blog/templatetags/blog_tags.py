@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag("Blog/Module/popular_post.html")
 def latest_posts():
-    posts=Post.objects.filter(status=1,published_date__lte=timezone.now()).order_by("published_date")[:1]
+    posts=Post.objects.filter(status=1,published_date__lte=timezone.now()).order_by("published_date")[:3]
     return {"posts":posts}
 
 

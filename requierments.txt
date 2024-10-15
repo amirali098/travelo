@@ -1,9 +1,0 @@
-Django
-pillow
-django-extensions
-django-robots
-django-debug-toolbar
-django-taggit
-django-summernote
-django-multi-captcha-admin
-django-simple-captcha

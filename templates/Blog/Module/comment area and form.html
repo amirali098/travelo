@@ -1,6 +1,8 @@
 {% load static %}
 {% load humanize %}
+
 <div class="comments-area">
+
     <h4>{{ comments|length }} Comments</h4>
     {% for comment in comments %}
         <div class="comment-list">
@@ -32,13 +34,13 @@
         <p1> No Comments</p1>
         </div>
     {% endfor %}
-</div>
 <div class="comment-form">
     <h4>Leave a Reply</h4>
-    <form class="form-contact comment_form" method="post" action="{% url "blog:blog-single" id=post.id %}"  id="commentForm">
+    <form class="form-contact comment_form" method="post" action="{% url "blog:blog-single" id=post.id %}"
+          id="commentForm">
         {% csrf_token %}
         <div class="row">
-           <input class="form-control" name="post" id="website" type="hidden" value="{{ post.id }}" >
+            <input class="form-control" name="post" id="website" type="hidden" value="{{ post.id }}">
             <div class="col-12">
                 <div class="form-group">
                     <input class="form-control" name="subject" id="website" type="text" placeholder="subject">
@@ -46,7 +48,8 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                  <textarea class="form-control w-100" name="message" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                    <textarea class="form-control w-100" name="message" id="comment" cols="30" rows="9"
+                              placeholder="Write Comment"></textarea>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -60,12 +63,12 @@
                 </div>
             </div>
             <div class="col-12">
-            <!-- CAPTCHA Field -->
-            <div class="form-group">
-                {{ form.captcha.errors }} <!-- To show CAPTCHA errors if there are any -->
-                {{ form.captcha }}         <!-- This renders the CAPTCHA field -->
+                <!-- CAPTCHA Field -->
+                <div class="form-group">
+                    {{ form.captcha.errors }} <!-- To show CAPTCHA errors if there are any -->
+                    {{ form.captcha }}         <!-- This renders the CAPTCHA field -->
+                </div>
             </div>
-        </div>
 
         </div>
         <div class="form-group">

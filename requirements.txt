@@ -7,3 +7,5 @@ django-taggit
 django-summernote
 django-multi-captcha-admin
 django-simple-captcha
+django-compressor
+gunicorn

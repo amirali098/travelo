@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load blog_tags %}
+{% load humanize %}
+
 {% block content %}
     <div class="bradcam_area bradcam_bg_4">
         <div class="container">
@@ -43,7 +45,7 @@
                                         </li>
                                         <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}<a href="{% url 'blog:category-filter' id=cat.id %}">
                                             {{ cat.name }}{% if not forloop.last %},{% endif %}{% endfor %}</a></li>
-                                        <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|date:"d M Y" }}
+                                        <li><a href="#"><i class="bi bi-eye"></i> {{ post.published_date|naturaltime }}
                                         </a></li>
                                     </ul>
                                 </div>
@@ -51,22 +53,27 @@
                         {% endfor %}
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
+                                {% if posts.has_previous %}
                                 <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
+                                    <a href="?page={{ posts.previous_page_number }}" class="page-link" aria-label="Previous">
                                         <i class="ti-angle-left"></i>
                                     </a>
                                 </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
+                                {% endif %}
+                            {% for page in posts.paginator.page_range %}
+                                <li class="page-item {% if posts.number == page %}active{% endif %}">
+                                    <a href="?page={{ page }}" class="page-link">{{ page }}</a>
                                 </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
+                            {% endfor %}
+
+                            {% if posts.has_next %}
                                 <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
+                                    <a href="?page={{ posts.next_page_number }}" class="page-link" aria-label="Next">
                                         <i class="ti-angle-right"></i>
                                     </a>
                                 </li>
+                            {% endif %}
+
                             </ul>
                         </nav>
                     </div>
