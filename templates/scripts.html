@@ -1,11 +1,7 @@
 {% load static %}
 {% load compress %}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 
-{% compress js %}
-
-
+{#{% compress js %}#}
 <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
 <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
@@ -25,13 +21,18 @@
 <script src="{% static 'js/plugins.js' %}"></script>
 <script src="{% static 'js/gijgo.min.js' %}"></script>
 <script src="{% static 'js/slick.min.js' %}"></script>
-
 <script src="{% static 'js/contact.js' %}"></script>
 <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
 <script src="{% static 'js/jquery.form.js' %}"></script>
 <script src="{% static 'js/jquery.validate.min.js' %}"></script>
 <script src="{% static 'js/mail-script.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+{#{% endcompress %}#}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
 <script>
     $('#datepicker').datepicker({
         iconsLibrary: 'fontawesome',
@@ -42,19 +43,19 @@
 </script>
 
 {% if messages %}
+
     <script>
+        Swal.fire({
+            text: messages, // Combine messages with line breaks
+            icon: 'info', // Use info icon
+        })
         // Create an array to hold the messages
-        var messages = [];
         {% for message in messages %}
-            messages.push("{{ message }}"); // Escape JS to prevent issues with quotes
+            var messages = [];
         {% endfor %}
 
+        messages.push("{{ message }}"); // Escape JS to prevent issues with quotes
         // Show the SweetAlert2 modal
-        Swal.fire({
-            text : messages, // Combine messages with line breaks
-            icon: 'info', // Use info icon
-         })
-
 
 
     </script>
@@ -64,16 +65,15 @@
 
 
 
-<script>
-    window.dataLayer = window.dataLayer || [];
 
+<script>
     function gtag() {
         dataLayer.push(arguments);
     }
+
+    window.dataLayer = window.dataLayer || [];
 
     gtag('js', new Date());
 
     gtag('config', 'UA-23581568-13');
 </script>
-
-{% endcompress %}
