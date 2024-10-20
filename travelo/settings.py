@@ -104,16 +104,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#          'NAME': 'postgres',  # نام دیتابیس
-#         'USER': 'postgres',  # نام کاربری دیتابیس
-#         'PASSWORD': '1MwYodDSL1Z59v63dXya',  # رمز عبور دیتابیس
-#          'HOST': 'mysite-proxy.amirali098.svc',  # آدرس هاست دیتابیس
-#         'PORT': '5432',  # پورت اتصال
-#      }
-#  }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

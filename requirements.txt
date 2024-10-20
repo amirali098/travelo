@@ -11,3 +11,4 @@ django-compressor
 gunicorn
 whitenoise
 psycopg2-binary
+
