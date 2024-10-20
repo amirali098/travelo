@@ -37,7 +37,7 @@
                                     <a class="d-inline-block" href="{% url "blog:blog-single" id=post.id %}">
                                         <h2>{{ post.title }}</h2>
                                     </a>
-                                    <p>{{ post.content|truncatewords:25 }}</p>
+                                    <p>{{ post.content|truncatewords:25|safe }}</p>
                                     <ul class="blog-info-link">
                                         <li><a href="#"><i class="fa fa-user"></i>{{ post.author }}</a></li>
                                         <li><a href="#"><i class="fa fa-comments"></i> {{ post|approved_comment_count }} Comments</a></li>

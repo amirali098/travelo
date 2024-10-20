@@ -12,8 +12,9 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/app/static  # Ensure Nginx can access the static files
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - .:/app  # اتصال دایرکتوری اپلیکیشن به nginx
+
     ports:
       - "80:80"
     depends_on:

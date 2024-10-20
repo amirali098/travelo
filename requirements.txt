@@ -9,3 +9,5 @@ django-multi-captcha-admin
 django-simple-captcha
 django-compressor
 gunicorn
+whitenoise
+psycopg2-binary

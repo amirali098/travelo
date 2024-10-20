@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from .models import Post, Comment
 from django.utils import timezone
-from blog.forms import CommentForm
+from blog.forms import CommentForm, NewsletterForm
 from django.contrib import messages
 
 
@@ -74,3 +74,21 @@ def search(request):
             posts = posts.filter(content__contains=s)
     context = {"posts": posts}
     return render(request, 'Blog/blog.html', context)
+
+
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully subscribed to the newsletter!')
+            return redirect('Main:home')
+        else:
+            messages.add_message(request, messages.ERROR, "Not Succsesfully")
+            return redirect('Main:home')
+
+    else:
+        form = NewsletterForm()
+        return render(request, 'Blog/blog.html')

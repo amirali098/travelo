@@ -8,6 +8,8 @@ from  django.contrib import messages
 # Create your views here.
 from django.urls import reverse
 
+from accounts.forms import CustomUserCreationForm
+
 
 def user_login(request):
     if not request.user.is_authenticated:
@@ -31,20 +33,21 @@ def user_logout(request):
         logout(request)
         return redirect("/")
 
+def forget_password(request):
+    pass
+
 
 def signup(request):
     if request.user.is_authenticated:
         return redirect("/")
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Registration successful!")  # Change message to success
-            return redirect('accounts:login')  # Use redirect instead of reverse
-        else:
-            # Do not need to pass messages; use form errors directly in template
-            pass
+            messages.success(request, "Registration successful!")
+            return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, "accounts/signup.html", {'form': form})

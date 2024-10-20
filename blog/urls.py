@@ -13,5 +13,6 @@ urlpatterns = [
     path("tags/<str:tag_name>",views.home,name='tag'),
     path("Search",views.search,name='search'),
     path("rss/feed/", LatestEntriesFeed()),
+    path('subscribe/', views.subscribe, name='subscribe'),
 
 ]

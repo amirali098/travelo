@@ -1,31 +1,38 @@
-# انتخاب image پایه برای python
+# dockerfiles/prod/django/Dockerfile
+
+# pull official base image
 FROM python:3.9-slim
 
-# نصب nginx
-RUN apt-get update
 
-# تعیین دایرکتوری کاری داخل کانتینر
+# set work directory
 WORKDIR /app
 
-# نصب پکیج‌های مورد نیاز
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# install dependencies
+COPY ./requirements.txt .
 
-# کپی تمام فایل‌های پروژه
-COPY . /app/
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# کپی فایل پیکربندی nginx به مسیر مناسب
+
+# Set up Gunicorn
+COPY . /app
+
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx
+
+
+
+# Configure Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# اجرای دستورات مربوط به migrate و collectstatic
-RUN python manage.py migrate --noinput
-RUN python manage.py collectstatic --noinput
-#RUN python manage.py compress --force  # Keep this commented if not needed
-
-# باز کردن پورت برای ارتباط
+# exposing nginx port
 EXPOSE 80
 
 
+# copy entrypoint
+COPY entrypoint.sh .
 
-# اجرای gunicorn برای محیط production
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "travelo.wsgi:application"]
+# make our entrypoint.sh executable
+RUN chmod +x ./entrypoint.sh
+
+# execute our entrypoint.sh file
+CMD ["./entrypoint.sh"]

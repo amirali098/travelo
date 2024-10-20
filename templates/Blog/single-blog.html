@@ -31,7 +31,7 @@
                             </h2>
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class="fa fa-user"></i> {{ post.author }}</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> {{ post|approved_comment_count }} Comments</a></li>
                                 <li><a href="#"><i class="bi bi-eye"></i> {{ post.counted_views }} Views</a></li>
                                 <li><i class="bi bi-eye"></i>{% for cat in post.category.all %}
                                     <a href="{% url 'blog:category-filter' id=cat.id %}">

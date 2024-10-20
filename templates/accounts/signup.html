@@ -8,77 +8,74 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
-                            <form method="post" action="{% url "accounts:signup" %}">
-                                {% csrf_token %}
-                                <div class="mb-md-5 mt-md-4 pb-5">
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <div class="mb-md-5 mt-md-4 pb-5">
 
-                                    <h2 class="fw-bold mb-2 text-uppercase">Sign up</h2>
-                                    <p class="text-white-50 mb-5">Please enter your username and password for sign
-                                        UP!</p>
+        <h2 class="fw-bold mb-2 text-uppercase">Sign up</h2>
+        <p class="text-white-50 mb-5">Please enter your username and password for sign UP!</p>
 
-                                    <div data-mdb-input-init class="form-outline form-white mb-5">
-                                        <input type="text" name="username" id="typeEmailX"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="typeEmailX">username</label>
-                                          {% if form.username.errors %}
-                                        <div class="error">
-                                            {% for error in form.username.errors %}
-                                                <p>{{ error }}</p>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    </div>
+        <div data-mdb-input-init class="form-outline form-white mb-5">
+            <input type="text" name="username" class="form-control form-control-lg" />
+            <label class="form-label" for="typeEmailX">Username</label>
+            {% if form.username.errors %}
+                <div class="error">
+                    {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
+        <div data-mdb-input-init class="form-outline form-white mb-4">
+            <input type="password" name="password1" class="form-control form-control-lg" />
+            <label class="form-label" for="typePasswordX">Password</label>
+            {% if form.password1.errors %}
+                <div class="error">
+                    {% for error in form.password1.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
+        <div data-mdb-input-init class="form-outline form-white mb-4">
+            <input type="password" name="password2" class="form-control form-control-lg" />
+            <label class="form-label" for="typePasswordX">Confirmation Password</label>
+            {% if form.password2.errors %}
+                <div class="error">
+                    {% for error in form.password2.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
-                                    <div data-mdb-input-init class="form-outline form-white mb-4">
-                                        <input type="password" name="password1" id="typePasswordX"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label " for="typePasswordX">Password</label>
-                                        {% if form.password1.errors %}
-                                        <div class="error">
-                                            {% for error in form.password1.errors %}
-                                                <p>{{ error }}</p>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    </div>
+        <div data-mdb-input-init class="form-outline form-white mb-4">
+            <input type="email" name="email" class="form-control form-control-lg" />
+            <label class="form-label">Email</label>
+            {% if form.email.errors %}
+                <div class="error">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
+        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Sign Up</button>
 
-
-                                    <div data-mdb-input-init class="form-outline form-white mb-4">
-                                        <input type="password" name="password2" id="typePasswordX"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label " for="typePasswordX">Confirmation Passowrd</label>
-                                        {% if form.password2.errors %}
-                                        <div class="error">
-                                            {% for error in form.password2.errors %}
-                                                <p>{{ error }}</p>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    </div>
-
-
-
-                                    <button data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-outline-light btn-lg px-5" type="submit">Sign Up
-                                    </button>
-
-
-                                    {% if form.errors %}
-                                        <div class="error-summary">
-                                            <ul>
-                                                {% for field, errors in form.errors.items %}
-                                                    <li>{{ field }}: {{ errors|striptags }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    {% endif %}
-
-
-                                </div>
-                            </form>
+        {% if form.errors %}
+            <div class="error-summary">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li>{{ field }}: {{ errors|striptags }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</form>
 
 
                         </div>
